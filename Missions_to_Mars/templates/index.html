@@ -1,0 +1,95 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mission to Mars</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+      h1, h2, h3, h4, h5{
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bold;
+      }
+
+      p{
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: large;
+      }
+
+      .img-title{
+        position: relative;
+        padding-top: 10px;
+        padding-bottom: 10px;
+      }
+
+      .hemi-title{
+        position: relative;
+        padding-top: 20px;
+      }
+    </style>
+</head>
+
+<body>
+  <div class="container-fluid">
+
+    <div class="jumbotron text-center">
+        <h1>Missions to Mars</h1>
+        <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <h2>Latest Mars News</h2>
+      </div>      
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <h4>{{mars.news_title}}</h4>
+        <p>{{mars.news_p}}</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-8">
+        <h2 class="">Featured Mars Image</h2> 
+        <img class="col-md-12" src="{{mars.featured_image_url}}" alt="Features Mars Image">
+      </div>
+      <div class="col-md-4">
+        <h3>Mars Facts</h3>
+        <div class="table-striped" style="text-align: left;">
+          {{mars.facts_tb_html | safe }}
+        </div>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-md-12 hemi-title">
+        <h2 style="text-align: center;">Mars hemispheres</h2>  
+      </div>
+      <hr>
+    </div>
+    </br>
+    <div class="row">       
+            {% for hem_img in mars.hemisphere_image_urls %} 
+              <div class="col-6 border">
+                <div >
+                  <img width=100% src="{{hem_img.img_url | safe}}">
+                </div>
+
+                <div>
+                  <h5 class="img-title"> {{hem_img.title}} </h5>  
+                </div>
+              </div>
+            {% endfor %}
+    </div> 
+  <hr>
+</body>
+
+</html>
